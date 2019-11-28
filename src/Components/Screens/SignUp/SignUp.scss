@@ -3,12 +3,14 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 100vh;
+    // height: 100vh;
 
     .signup__conatiner {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        width: 440px;
+        margin: 10px;
 
         .signup__conatiner__header {
             text-align: center;
@@ -27,39 +29,10 @@
             }
         }
 
-        .signup__container__separator {
-            color: #888;
-            position: relative;
-            text-align: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
-
-            &::before {
-                content: "";
-                display: block;
-                position: absolute;
-                top: 50%;
-                width: 100%;
-                height: 2px;
-                background-color: hsla(0, 0%, 73.3%, .25);
-                -webkit-transform: translateY(-50%);
-                transform: translateY(-50%);
-                z-index: 1;
-            }
-
-            span {
-                position: relative;
-                display: inline-block;
-                margin: 0 auto;
-                background-color: #fff;
-                padding: 10px;
-                z-index: 2;
-            }
-        }
-
         .signup__container__form {
             background: white;
-            padding: 20px;
+            padding: 30px;
+            border-radius: 4px;
 
             .signup__container__form__auth {
                 text-align: center;
@@ -74,10 +47,45 @@
                     background: #ededed;
                     border: none;
                     width: 100%;
-                    padding: 5px;
+                    padding: 6px;
                     font-size: 16px;
                     font-weight: 600;
                     border-radius: 4px;
+
+                    &:hover {
+                        background: #f3f3f3;
+                        border-color: #f3f3f3;
+                    }
+                }
+            }
+
+            .signup__container__separator {
+                color: #888;
+                position: relative;
+                text-align: center;
+                margin-top: 20px;
+                margin-bottom: 20px;
+
+                &::before {
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    top: 50%;
+                    width: 100%;
+                    height: 2px;
+                    background-color: hsla(0, 0%, 73.3%, .25);
+                    -webkit-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                    z-index: 1;
+                }
+
+                span {
+                    position: relative;
+                    display: inline-block;
+                    margin: 0 auto;
+                    background-color: #fff;
+                    padding: 10px;
+                    z-index: 2;
                 }
             }
 
@@ -86,8 +94,65 @@
                 form {
                     display: flex;
                     flex-direction: column;
+
+                    .signup__form__register__button {
+                        color: #fff;
+                        background-color: #39e09b;
+                        border: 2px solid #39e09b;
+                        border-radius: 0;
+                        letter-spacing: .5px;
+                        font-size: 16px;
+                        margin: 10px 0px;
+                    }
+
+                    .MuiFormControl-root {
+                        margin: 10px 0px !important;
+                    }
+
+                    .MuiOutlinedInput-input {
+                        padding: 12.5px 14px;
+                    }
+
+                    .MuiFormLabel-root {
+                        font-size: 0.9rem !important;
+
+                    }
+                }
+            }
+        }
+
+        .signup__container_footer {
+            text-align: center;
+            margin: 10% 0px;
+
+            .signup__container_footer_layer1 {
+                font-size: 1.15rem;
+                cursor: pointer;
+
+                &:hover {
+                    font-size: 1.17rem;
+                    color: red;
+                }
+            }
+
+            .signup__container_footer_layer2 {
+                display: flex;
+                justify-content: center;
+
+                p {
+                    margin: 10px;
+                    font-size: 12px;
+                    cursor: pointer;
+
+                    &:hover {
+                        font-size: 12.2px;
+                    }
                 }
             }
         }
     }
+}
+
+.MuiInputLabel-outlined.MuiInputLabel-shrink {
+    transform: translate(14px, -2px) scale(0.75) !important
 }
