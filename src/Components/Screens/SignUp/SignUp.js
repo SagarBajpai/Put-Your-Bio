@@ -6,6 +6,7 @@ import {
   checkForEmpty,
   validateUsername
 } from "../../Middleware/SignUp/Validate";
+import constant from "../../Common/Constants";
 
 class SignUp extends Component {
   constructor(props) {
@@ -163,6 +164,14 @@ class SignUp extends Component {
     }
   };
 
+  createUser = () => {
+    //Will hit API in Future
+    const { Email, Username, Password } = this.state;
+    console.log("Email : ", Email);
+    console.log("Username : ", Username);
+    console.log("Password : ", Password);
+  };
+
   render() {
     const {
       emailError,
@@ -175,9 +184,11 @@ class SignUp extends Component {
       <div id="signup">
         <div className="signup__conatiner">
           <div className="signup__conatiner__header">
-            <div className="signup__conatiner__header__title">Waycool</div>
+            <div className="signup__conatiner__header__title">
+              {constant.projectName}
+            </div>
             <div className="signup__conatiner__header__subtitle">
-              Sign up for your Waycool account
+              Sign up for your {constant.projectName} account
             </div>
           </div>
           <div className="signup__container__form">
@@ -228,21 +239,22 @@ class SignUp extends Component {
                   variant="outlined"
                   onChange={e => this.handleOnChange(e)}
                 />
-                {this.enableRegisterButton() ? (
-                  <input
-                    className="btn btn-primarys signup__form__register__button"
-                    type="submit"
-                    value="Register"
-                  ></input>
-                ) : (
-                  <input
-                    className="btn btn-primary disabled signup__form__register__button"
-                    style={{ cursor: "not-allowed" }}
-                    type="submit"
-                    value="Register"
-                  ></input>
-                )}
               </form>
+              {this.enableRegisterButton() ? (
+                <input
+                  className="btn btn-primarys signup__form__register__button"
+                  type="submit"
+                  value="Register"
+                  onClick={() => this.createUser()}
+                ></input>
+              ) : (
+                <input
+                  className="btn btn-primary disabled signup__form__register__button"
+                  style={{ cursor: "not-allowed" }}
+                  type="submit"
+                  value="Register"
+                ></input>
+              )}
             </div>
           </div>
           <div className="signup__container_footer">

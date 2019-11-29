@@ -1,0 +1,27 @@
+#sidebar {
+    height: 100%;
+    max-height: 100vh;
+    position: fixed;
+    display: flex;
+    width: 60px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 10001;
+    background-color: #39e09b;
+
+    .sidebar__container {
+        display: flex;
+        margin: 0 auto;
+
+        .sidebar__container_profile {
+            align-self: flex-end;
+            margin: 20px 0px;
+
+            .sidebar_user_icon {
+                width: 50px;
+                cursor: pointer;
+            }
+        }
+    }
+}
