@@ -1,4 +1,15 @@
-#Dashboard {
+#dashboard {
     height: 100vh;
     background: #f8f9fa !important;
+
+    .container {
+        display: flex;
+        justify-content: center;
+
+        .dashboard__linksection {
+            text-align: center;
+            width: 400px;
+            margin: 20px 10px;
+        }
+    }
 }
