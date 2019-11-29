@@ -103,6 +103,10 @@
                         letter-spacing: .5px;
                         font-size: 16px;
                         margin: 10px 0px;
+
+                        &:hover {
+                            opacity: 0.7;
+                        }
                     }
 
                     .MuiFormControl-root {

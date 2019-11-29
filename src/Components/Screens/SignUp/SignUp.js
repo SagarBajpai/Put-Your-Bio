@@ -19,7 +19,8 @@ class SignUp extends Component {
       usernameOnBlur: true,
       Password: "",
       RepeatPassword: "",
-      passwordError: ""
+      passwordError: "",
+      enableRegisterButton: false
     };
   }
 
@@ -137,6 +138,31 @@ class SignUp extends Component {
 
   worthLess = e => {};
 
+  enableRegisterButton = () => {
+    const {
+      emailError,
+      usernameError,
+      passwordError,
+      Email,
+      Username,
+      Password,
+      RepeatPassword
+    } = this.state;
+    if (
+      !emailError &&
+      !usernameError &&
+      !passwordError &&
+      Email.trim().length !== 0 &&
+      Username.trim().length !== 0 &&
+      Password.trim().length !== 0 &&
+      RepeatPassword.trim().length !== 0
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   render() {
     const {
       emailError,
@@ -188,6 +214,7 @@ class SignUp extends Component {
                 />
                 <TextField
                   id="Password"
+                  type="password"
                   label="Password"
                   variant="outlined"
                   onChange={e => this.handleOnChange(e)}
@@ -196,15 +223,25 @@ class SignUp extends Component {
                   error={passwordError.length === 0 ? false : true}
                   helperText={passwordError ? passwordError : false}
                   id="RepeatPassword"
+                  type="password"
                   label="Repeat password"
                   variant="outlined"
                   onChange={e => this.handleOnChange(e)}
                 />
-                <input
-                  className="btn btn-primary disabled signup__form__register__button"
-                  type="submit"
-                  value="Register"
-                ></input>
+                {this.enableRegisterButton() ? (
+                  <input
+                    className="btn btn-primarys signup__form__register__button"
+                    type="submit"
+                    value="Register"
+                  ></input>
+                ) : (
+                  <input
+                    className="btn btn-primary disabled signup__form__register__button"
+                    style={{ cursor: "not-allowed" }}
+                    type="submit"
+                    value="Register"
+                  ></input>
+                )}
               </form>
             </div>
           </div>
