@@ -1,10 +1,149 @@
 import React, { Component } from "react";
 import "./SignUp.scss";
-
 import TextField from "@material-ui/core/TextField";
+import {
+  validateEmail,
+  checkForEmpty,
+  validateUsername
+} from "../../Middleware/SignUp/Validate";
 
 class SignUp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      Email: "",
+      emailError: "",
+      emailOnBlur: true,
+      Username: "",
+      usernameError: "",
+      usernameOnBlur: true,
+      Password: "",
+      RepeatPassword: "",
+      passwordError: ""
+    };
+  }
+
+  onChangeCheck = (value, id, error, onBlur) => {
+    if (checkForEmpty(value)) {
+      this.setState({
+        [id]: value,
+        [error]: ""
+      });
+      return false;
+    } else {
+      this.setState({ [error]: "" });
+    }
+    if (!onBlur && id === "Email") {
+      if (!validateEmail(value)) {
+        this.setState({ [error]: "Email does not valid" });
+        return false;
+      } else {
+        this.setState({ [error]: "" });
+        return true;
+      }
+    } else {
+      return true;
+    }
+  };
+
+  checkForPassword = id => {
+    const { Password, RepeatPassword } = this.state;
+    if (id === "Password" && RepeatPassword.trim().length === 0) {
+      if (Password.trim().length === 0 && RepeatPassword.trim().length === 0) {
+        return this.setState({
+          passwordError: ""
+        });
+      }
+      return;
+    }
+    if (Password !== RepeatPassword) {
+      this.setState({
+        passwordError: "Passwords are not matching"
+      });
+    } else {
+      this.setState({
+        passwordError: ""
+      });
+    }
+  };
+
+  handleOnChange = e => {
+    let id = e.target.id;
+    let value = e.target.value;
+    let check;
+    const { emailOnBlur } = this.state;
+    switch (id) {
+      case "Email":
+        check = this.onChangeCheck(value, id, "emailError", emailOnBlur);
+        break;
+      case "Username":
+        check = validateUsername(value);
+        if (!check) {
+          this.setState({
+            usernameError: "Special characters are not allowed"
+          });
+        } else {
+          this.setState({
+            usernameError: ""
+          });
+        }
+        break;
+      default:
+    }
+    this.setState(
+      {
+        [id]: value
+      },
+      () => {
+        (id === "RepeatPassword" || id === "Password") &&
+          this.checkForPassword(id);
+      }
+    );
+  };
+
+  handleOnBlur = e => {
+    let id = e.target.id;
+    let value = e.target.value;
+    switch (id) {
+      case "Email":
+        if (checkForEmpty(value)) {
+          return this.setState({
+            emailError: "Email cannot be empty"
+          });
+        }
+        if (!validateEmail(value)) {
+          return this.setState({
+            emailError: "Email does not valid",
+            emailOnBlur: false
+          });
+        } else {
+          this.setState({ emailError: "" });
+        }
+        break;
+      case "Username":
+        if (checkForEmpty(value)) {
+          return this.setState({
+            usernameError: "Username cannot be empty"
+          });
+        }
+        break;
+      default:
+    }
+
+    this.setState({
+      [id]: value
+    });
+  };
+
+  worthLess = e => {};
+
   render() {
+    const {
+      emailError,
+      emailOnBlur,
+      usernameError,
+      passwordError
+    } = this.state;
     const instagramImage = "/images/signup/instagram.svg";
     return (
       <div id="signup">
@@ -28,24 +167,38 @@ class SignUp extends Component {
             <div className="signup__container__form__inputfields">
               <form noValidate autoComplete="off">
                 <TextField
-                  id="outlined-basic"
+                  error={emailError.length === 0 ? false : true}
+                  helperText={emailError ? emailError : false}
+                  id="Email"
                   label="Email"
                   variant="outlined"
+                  onChange={e => this.handleOnChange(e)}
+                  onBlur={
+                    emailOnBlur ? e => this.handleOnBlur(e) : this.worthLess()
+                  }
                 />
                 <TextField
-                  id="outlined-basic"
+                  error={usernameError.length === 0 ? false : true}
+                  helperText={usernameError ? usernameError : false}
+                  id="Username"
                   label="Username"
                   variant="outlined"
+                  onChange={e => this.handleOnChange(e)}
+                  onBlur={e => this.handleOnBlur(e)}
                 />
                 <TextField
-                  id="outlined-basic"
+                  id="Password"
                   label="Password"
                   variant="outlined"
+                  onChange={e => this.handleOnChange(e)}
                 />
                 <TextField
-                  id="outlined-basic"
+                  error={passwordError.length === 0 ? false : true}
+                  helperText={passwordError ? passwordError : false}
+                  id="RepeatPassword"
                   label="Repeat password"
                   variant="outlined"
+                  onChange={e => this.handleOnChange(e)}
                 />
                 <input
                   className="btn btn-primary disabled signup__form__register__button"
