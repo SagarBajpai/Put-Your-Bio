@@ -2,7 +2,8 @@ import React from "react";
 import "./LinkPad.scss";
 import Switch from "react-switch";
 
-function LinkPad(props) {
+const LinkPad = props => {
+  const { checked, onChange, onClick } = props;
   return (
     <div className="linkPad">
       <div className="linkPad__shell">
@@ -26,8 +27,8 @@ function LinkPad(props) {
             <div className="linkPad__input_options">
               <label>
                 <Switch
-                  // checked={this.state.checked}
-                  // onChange={this.handleChange}
+                  checked={checked}
+                  onChange={onChange}
                   onColor="#86d3ff"
                   onHandleColor="#2693e6"
                   handleDiameter={20}
@@ -43,11 +44,17 @@ function LinkPad(props) {
               </label>
             </div>
           </div>
-          <div className="linkPad__options">_</div>
+          <div className="linkPad__options">
+            <i
+              className="fa fa-trash-o icons"
+              aria-hidden="true"
+              onClick={e => onClick("delete")}
+            ></i>
+          </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default LinkPad;

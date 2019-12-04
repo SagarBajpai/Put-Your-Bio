@@ -14,6 +14,7 @@
       width: 30px;
       border-top-left-radius: 10px;
       border-bottom-left-radius: 10px;
+      cursor: all-scroll;
 
       .linkPad__dots__container {
         .linkPad__dots {
@@ -38,6 +39,7 @@
         .linkPad__input_fields {
           display: inline-block;
           width: 84%;
+          padding-right: 21px;
 
           input {
             width: 100%;
@@ -60,9 +62,20 @@
 
       .linkPad__options {
         display: inline-block;
+        text-align: right;
         width: 100%;
         background: white;
         border-bottom-left-radius: 10px;
+
+        .icons {
+          margin: 0px 5px;
+          font-size: 17px;
+          cursor: pointer;
+
+          &:hover {
+            color: cadetblue;
+          }
+        }
       }
     }
   }
